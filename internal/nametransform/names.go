@@ -16,7 +16,7 @@ import (
 type NameTransform struct {
 	emeCipher  *eme.EMECipher
 	longNames  bool
-	DirIVCache dirIVCache
+	DirIVCache *dirIVCache
 	// B64 = either base64.URLEncoding or base64.RawURLEncoding, depeding
 	// on the Raw64 feature flag
 	B64 *base64.Encoding
@@ -31,6 +31,7 @@ func New(e *eme.EMECipher, longNames bool, raw64 bool) *NameTransform {
 	return &NameTransform{
 		emeCipher: e,
 		longNames: longNames,
+		DirIVCache: NewDirIVCache(),
 		B64:       b64,
 	}
 }
